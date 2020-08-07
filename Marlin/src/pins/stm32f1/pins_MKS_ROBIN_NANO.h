@@ -273,3 +273,5 @@
   #define W25QXX_MISO_PIN                   PB14
   #define W25QXX_SCK_PIN                    PB13
 #endif
+
+
