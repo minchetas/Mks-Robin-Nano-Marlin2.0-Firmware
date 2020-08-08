@@ -107,9 +107,21 @@ void protected_pin_err();
   inline void suicide() { OUT_WRITE(SUICIDE_PIN, SUICIDE_PIN_INVERTING); }
 #endif
 
+//@ Fix: Invierte la lógica del KILL_PIN 
+//#if HAS_KILL
+//  #ifndef KILL_PIN_STATE
+//    #define KILL_PIN_STATE LOW
+//  #endif
+//  inline bool kill_state() { return READ(KILL_PIN) == KILL_PIN_STATE; }
+//#endif
+
 #if HAS_KILL
   #ifndef KILL_PIN_STATE
-    #define KILL_PIN_STATE LOW
+    #if KILL_PIN_INVERTING
+      #define KILL_PIN_STATE HIGH
+    #else
+      #define KILL_PIN_STATE LOW
+    #endif
   #endif
   inline bool kill_state() { return READ(KILL_PIN) == KILL_PIN_STATE; }
 #endif
